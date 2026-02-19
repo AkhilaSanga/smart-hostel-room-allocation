@@ -144,14 +144,6 @@ button:disabled {
   align-items: center;
 }
 
-/* .room-card {
-  background-color: #f9f9f9;
-  color: #333;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-} */
-
 /* ---------- SEARCH RESULTS ---------- */
 
 .search-results ul {
@@ -187,16 +179,19 @@ button:disabled {
   padding: 12px;
   border-radius: 8px;
   font-size: 14px;
+  color: #333;   /* ✅ ADD THIS */
 }
 
 .success {
   background-color: #e8f5e9;
   border: 1px solid #66bb6a;
+  color: #1b5e20;   /* ✅ ADD THIS (dark green text) */
 }
 
 .allocation-result.error {
   background-color: #ffebee;
   border: 1px solid #ef5350;
+  color: #b71c1c;   /* ✅ ADD THIS (dark red text) */
 }
 
 /* ---------- RESPONSIVE DESIGN ---------- */
