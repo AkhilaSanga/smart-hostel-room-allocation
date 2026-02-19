@@ -177,6 +177,7 @@ function App() {
 const totalRooms = rooms.length;
 const allocatedRooms = rooms.filter((room) => room.isAllocated).length;
 const availableRooms = totalRooms - allocatedRooms;
+
 // ---------------- UI ----------------
 
   return (
