@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
   const [roomNumber, setRoomNumber] = useState("");
   const [capacity, setCapacity] = useState("");
-  const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState(() => {
+  const savedRooms = localStorage.getItem("rooms");
+  return savedRooms ? JSON.parse(savedRooms) : [];
+});
+
+useEffect(() => {
+  localStorage.setItem("rooms", JSON.stringify(rooms));
+}, [rooms]);
   const [message, setMessage] = useState("");
 
   const handleAddRoom = (e) => {
