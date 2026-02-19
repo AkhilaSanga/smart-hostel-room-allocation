@@ -20,11 +20,11 @@ useEffect(() => {
   localStorage.setItem("rooms", JSON.stringify(rooms));
 }, [rooms]);
 
-useEffect(() => {
-  if (allocationResult) {
-    setAllocationResult(null);
-  }
-}, [rooms]);
+// useEffect(() => {
+//   if (allocationResult) {
+//     setAllocationResult(null);
+//   }
+// }, [rooms]);
 
   
 
