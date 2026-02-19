@@ -171,6 +171,12 @@ function App() {
   setAllocationResult(null);
   setMessage("All rooms cleared successfully");
 };
+
+// ---------------- ROOM STATISTICS ----------------
+
+const totalRooms = rooms.length;
+const allocatedRooms = rooms.filter((room) => room.isAllocated).length;
+const availableRooms = totalRooms - allocatedRooms;
 // ---------------- UI ----------------
 
   return (
@@ -230,6 +236,25 @@ function App() {
       {roomError && (
         <p style={{ color: "red" }}>{roomError}</p>
       )}
+
+      {/* ---------------- DASHBOARD ---------------- */}
+
+      <div className="dashboard">
+        <div className="card">
+          <h3>Total Rooms</h3>
+          <p>{totalRooms}</p>
+        </div>
+
+        <div className="card allocated">
+          <h3>Allocated</h3>
+          <p>{allocatedRooms}</p>
+        </div>
+
+        <div className="card available">
+          <h3>Available</h3>
+          <p>{availableRooms}</p>
+        </div>
+      </div>
 
       {/* ---------------- ROOM LIST ---------------- */}
 
@@ -386,7 +411,7 @@ Status: {room.isAllocated ? "Allocated" : "Available"}
       )}
 
       {/* ---------------- FOOTER ---------------- */}
-      
+
       <footer className="footer">
         © 2026 Akhila Sanga | Smart Hostel Room Allocation | Version {APP_VERSION}
       </footer>
