@@ -10,6 +10,7 @@ function App() {
   const [students, setStudents] = useState("");
   const [needsAC, setNeedsAC] = useState(false);
   const [needsWashroom, setNeedsWashroom] = useState(false);
+  const [message, setMessage] = useState("");
   const [rooms, setRooms] = useState(() => {
   const savedRooms = localStorage.getItem("rooms");
   return savedRooms ? JSON.parse(savedRooms) : [];
@@ -18,7 +19,14 @@ function App() {
 useEffect(() => {
   localStorage.setItem("rooms", JSON.stringify(rooms));
 }, [rooms]);
-  const [message, setMessage] = useState("");
+
+useEffect(() => {
+  if (allocationResult) {
+    setAllocationResult(null);
+  }
+}, [rooms]);
+
+  
 
   const handleAddRoom = (e) => {
     e.preventDefault();
@@ -41,6 +49,7 @@ useEffect(() => {
     setCapacity("");
     setHasAC(false);
     setHasAttachedWashroom(false);
+    setAllocationResult(null);
     setMessage("Room added successfully");
   };
 
@@ -78,6 +87,7 @@ useEffect(() => {
 
   const updatedRooms = rooms.filter((room) => room.id !== id);
   setRooms(updatedRooms);
+  setAllocationResult(null);
   setMessage("Room deleted successfully");
 };
 
@@ -133,8 +143,11 @@ useEffect(() => {
           {rooms.map((room) => (
             <li key={room.id} className="room-item">
               <span>
-                Room {room.roomNumber} — Capacity: {room.capacity}
+                Room {room.roomNumber} | Capacity: {room.capacity} |{" "}
+                {room.hasAC ? "AC" : "Non-AC"} |{" "}
+                {room.hasAttachedWashroom ? "Attached Washroom" : "Common Washroom"}
               </span>
+
               <button
                 className="delete-btn"
                 onClick={() => handleDeleteRoom(room.id)}
@@ -173,24 +186,40 @@ useEffect(() => {
       </label>
 
       <button
-        onClick={() =>
-          allocateRoom(Number(students), needsAC, needsWashroom)
-        }
+        onClick={() => {
+          if (!students || Number(students) <= 0) {
+            setAllocationResult({
+              success: false,
+              message: "Please enter a valid number of students",
+            });
+            return;
+          }
+
+          allocateRoom(Number(students), needsAC, needsWashroom);
+        }}
       >
         Allocate
       </button>
       {allocationResult && (
-        <div className="allocation-result">
+        <div className={`allocation-result ${allocationResult.success ? "success" : "error"}`}>
           {allocationResult.success ? (
-            <p>
-              Room Allocated: Room {allocationResult.room.roomNumber} (Capacity:{" "}
-              {allocationResult.room.capacity})
-            </p>
+            <>
+              <p><strong>Room Allocated Successfully</strong></p>
+              <p>
+                Room No: {allocationResult.room.roomNumber}<br />
+                Capacity: {allocationResult.room.capacity}<br />
+                {allocationResult.room.hasAC ? "AC Available" : "Non-AC"}<br />
+                {allocationResult.room.hasAttachedWashroom
+                  ? "Attached Washroom"
+                  : "Common Washroom"}
+              </p>
+            </>
           ) : (
             <p>{allocationResult.message}</p>
           )}
         </div>
       )}
+
     </div>
   );
 }
