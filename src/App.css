@@ -11,6 +11,18 @@ body {
   justify-content: center;
 }
 
+label {
+  color: #333;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+input[type="checkbox"] {
+  accent-color: #2563eb;
+}
+
 /* ---------- MAIN CONTAINER ---------- */
 
 .container {
