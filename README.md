@@ -8,7 +8,7 @@ This project allows users to add rooms, search rooms, and intelligently allocate
 
 ## 🚀 Live Demo
 
-🔗 https://your-project-name.vercel.app
+🔗 https://smart-hostel-room-allocation.vercel.app/
 
 ---
 
