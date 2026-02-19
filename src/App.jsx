@@ -160,13 +160,30 @@ function App() {
     setMessage("Room deleted successfully");
   };
 
+  const handleClearAllRooms = () => {
+  const confirmClear = window.confirm(
+    "Are you sure you want to delete ALL rooms?"
+  );
+
+  if (!confirmClear) return;
+
+  setRooms([]);
+  setAllocationResult(null);
+  setMessage("All rooms cleared successfully");
+};
 // ---------------- UI ----------------
 
   return (
     <div className="container">
       <h2>Smart Hostel Room Allocation</h2>
+
       <p className="version">Version {APP_VERSION}</p>
+
       <p className="room-count">Total Rooms: {rooms.length}</p>
+      <button className="clear-btn" onClick={handleClearAllRooms}>
+        Clear All Rooms
+      </button>
+
 
       {/* ---------------- ADD ROOM ---------------- */}
       
@@ -227,7 +244,8 @@ function App() {
               <span>
                 Room {room.roomNumber} | Capacity: {room.capacity} |{" "}
                 {room.hasAC ? "AC" : "Non-AC"} |{" "}
-                {room.hasAttachedWashroom ? "Attached Washroom" : "Common Washroom"}
+                {room.hasAttachedWashroom ? "Attached Washroom" : "Common Washroom"} |{" "}
+Status: {room.isAllocated ? "Allocated" : "Available"}
               </span>
 
               <button
@@ -367,6 +385,11 @@ function App() {
         <p className="error" style={{ color: "red" }}>{allocationError}</p>
       )}
 
+      {/* ---------------- FOOTER ---------------- */}
+      
+      <footer className="footer">
+        © 2026 Akhila Sanga | Smart Hostel Room Allocation | Version {APP_VERSION}
+      </footer>
 
     </div>
   );
