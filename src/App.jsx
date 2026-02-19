@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
+const APP_VERSION = "v1.1.0";
+
 function App() {
 
   // ---------------- STATE ----------------
@@ -77,6 +79,7 @@ function App() {
       capacity: Number(capacity),
       hasAC,
       hasAttachedWashroom,
+      isAllocated: false,   // ✅ NEW
     };
 
     setRooms([...rooms, newRoom]);
@@ -109,6 +112,7 @@ function App() {
   const allocateRoom = (students, needsAC, needsWashroom) => {
     const suitableRooms = rooms
       .filter((room) => {
+        if (room.isAllocated) return false;   // ✅ NEW
         if (room.capacity < students) return false;
         if (needsAC && !room.hasAC) return false;
         if (needsWashroom && !room.hasAttachedWashroom) return false;
@@ -124,9 +128,20 @@ function App() {
       return;
     }
 
+    // ✅ NEW LOGIC STARTS HERE
+    const allocatedRoom = suitableRooms[0];
+
+    const updatedRooms = rooms.map((room) =>
+      room.id === allocatedRoom.id
+        ? { ...room, isAllocated: true }
+        : room
+    );
+
+    setRooms(updatedRooms);
+
     setAllocationResult({
       success: true,
-      room: suitableRooms[0],
+      room: allocatedRoom,
     });
   };
 
@@ -150,6 +165,8 @@ function App() {
   return (
     <div className="container">
       <h2>Smart Hostel Room Allocation</h2>
+      <p className="version">Version {APP_VERSION}</p>
+      <p className="room-count">Total Rooms: {rooms.length}</p>
 
       {/* ---------------- ADD ROOM ---------------- */}
       
