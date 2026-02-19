@@ -1,16 +1,196 @@
-# React + Vite
+# 🏨 Room Allocation System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive Room Management & Allocation Web Application built using **React.js (Vite)** and deployed on Vercel.
 
-Currently, two official plugins are available:
+This project allows users to add rooms, search rooms, and intelligently allocate the smallest suitable room based on given requirements.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Live Demo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🔗 https://your-project-name.vercel.app
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📌 Project Overview
+
+The Room Allocation System is designed to manage hostel rooms efficiently.  
+
+It allows users to:
+
+- Add new rooms
+- View all rooms
+- Search rooms
+- Allocate rooms based on requirements
+- Delete rooms
+- Persist room data using localStorage
+
+The system ensures that the **smallest possible room** satisfying the requirements is allocated.
+
+---
+
+## ✅ Functional Requirements Implemented
+
+### 1️⃣ Add Room
+Users can add new hostel rooms with:
+- Room Number
+- Capacity
+- AC Availability (Yes / No)
+- Attached Washroom (Yes / No)
+
+---
+
+### 2️⃣ View All Rooms
+Displays:
+- Room Number
+- Capacity
+- AC Status
+- Washroom Type
+- Delete Option
+
+---
+
+### 3️⃣ Search Rooms
+Users can filter rooms by:
+- Minimum Required Capacity
+- AC Required (Yes / No)
+- Attached Washroom Required (Yes / No)
+
+---
+
+### 4️⃣ Allocate Room
+
+`AllocateRoom(students, needsAC, needsWashroom)`
+
+- Allocates the smallest suitable room
+- Displays success message with room details
+- Shows "No room available" if no matching room exists
+
+---
+
+## 🎨 UI Features
+
+- Clean and centered layout
+- Responsive design (Mobile / Tablet / Desktop)
+- Styled buttons and cards
+- Success & error message highlighting
+- Production CSS debugging handled
+
+---
+
+## 🛠 Tech Stack
+
+- Frontend: React.js (Vite)
+- Styling: Custom CSS (Responsive Design)
+- State Management: React Hooks (useState, useEffect)
+- Data Persistence: Browser localStorage
+- Deployment: Vercel
+- Version Control: Git & GitHub
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+ ├── App.jsx
+ ├── App.css
+ ├── main.jsx
+ └── assets/
+```
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/your-username/your-repository-name.git
+```
+
+### 2️⃣ Navigate to Project
+
+```bash
+cd your-repository-name
+```
+
+### 3️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+### 4️⃣ Run Development Server
+
+```bash
+npm run dev
+```
+
+### 5️⃣ Build for Production
+
+```bash
+npm run build
+```
+
+---
+
+## 🌍 Deployment
+
+This project is deployed using Vercel.
+
+Steps:
+1. Push project to GitHub
+2. Import repository into Vercel
+3. Automatic CI/CD deployment
+
+---
+
+## 🧠 Allocation Logic (Core Concept)
+
+1. Filter rooms that:
+   - Have sufficient capacity
+   - Match AC requirement
+   - Match washroom requirement
+
+2. Sort filtered rooms by capacity (ascending)
+
+3. Allocate the smallest suitable room
+
+This ensures optimal space utilization.
+
+---
+
+## 📱 Responsive Design
+
+The application is fully responsive and works on:
+
+- Mobile Devices
+- Tablets
+- Laptops
+- Desktop Screens
+
+---
+
+## 🚀 Future Improvements
+
+- Backend Integration (Node.js + Express)
+- Database (MongoDB)
+- Authentication (Admin Login)
+- Room Availability Status Tracking
+- Advanced Sorting & Filtering
+- Tailwind CSS Migration
+- UI Animation Enhancements
+
+---
+
+## 👩‍💻 Author
+
+**Akhila Sanga**  
+Java Developer | React Developer | Software Engineer
+
+---
+
+## ⭐ Support
+
+If you like this project, consider giving it a ⭐ on GitHub!
