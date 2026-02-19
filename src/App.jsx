@@ -5,11 +5,15 @@ function App() {
   const [roomNumber, setRoomNumber] = useState("");
   const [capacity, setCapacity] = useState("");
   const [rooms, setRooms] = useState([]);
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleAddRoom = (e) => {
     e.preventDefault();
 
-    if (!roomNumber || !capacity) return;
+    if (!roomNumber || !capacity) {
+      setMessage("Please fill all fields");
+      return;
+    }
 
     const newRoom = {
       id: Date.now(),
@@ -18,64 +22,68 @@ function App() {
     };
 
     setRooms([...rooms, newRoom]);
-
-    // Reset form
     setRoomNumber("");
     setCapacity("");
+    setMessage("Room added successfully");
   };
 
+  const handleDeleteRoom = (id) => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete this room?"
+  );
+
+  if (!confirmDelete) return;
+
+  const updatedRooms = rooms.filter((room) => room.id !== id);
+  setRooms(updatedRooms);
+  setMessage("Room deleted successfully");
+};
+
   return (
-    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-      {/* Page Title */}
-      <h1>Room Management System</h1>
+    <div className="container">
+      <h2>Smart Hostel Room Allocation</h2>
 
-      {/* Section 1: Add Room Form */}
-      <section style={{ marginBottom: "30px" }}>
-        <h2>Add New Room</h2>
+      <form onSubmit={handleAddRoom}>
+        <input
+          type="text"
+          placeholder="Room Number"
+          value={roomNumber}
+          onChange={(e) => setRoomNumber(e.target.value)}
+        />
 
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: "10px" }}>
-            <label>Room Number:</label>
-            <br />
-            <input
-              type="text"
-              value={roomNumber}
-              onChange={(e) => setRoomNumber(e.target.value)}
-              placeholder="Enter room number"
-            />
-          </div>
+        <input
+          type="number"
+          placeholder="Capacity"
+          value={capacity}
+          onChange={(e) => setCapacity(e.target.value)}
+        />
 
-          <div style={{ marginBottom: "10px" }}>
-            <label>Capacity:</label>
-            <br />
-            <input
-              type="number"
-              value={capacity}
-              onChange={(e) => setCapacity(e.target.value)}
-              placeholder="Enter capacity"
-            />
-          </div>
+        <button type="submit">Add Room</button>
+      </form>
 
-          <button type="submit">Add Room</button>
-        </form>
-      </section>
+      {message && <p className="message">{message}</p>}
 
-      {/* Section 2: Room List */}
-      <section>
-        <h2>Available Rooms</h2>
+      <h3>Room List</h3>
 
-        {rooms.length === 0 ? (
-          <p>No rooms added yet.</p>
-        ) : (
-          <ul>
-            {rooms.map((room) => (
-              <li key={room.id}>
+      {rooms.length === 0 ? (
+        <p>No rooms added yet.</p>
+      ) : (
+        <ul className="room-list">
+          {rooms.map((room) => (
+            <li key={room.id} className="room-item">
+              <span>
                 Room {room.roomNumber} — Capacity: {room.capacity}
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+              </span>
+              <button
+                className="delete-btn"
+                onClick={() => handleDeleteRoom(room.id)}
+              >
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
