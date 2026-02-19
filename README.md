@@ -1,8 +1,10 @@
-# 🏨 Room Allocation System
+# 🏢 Smart Hostel Room Allocation System
+Version: – v1.1.0
 
-A responsive Room Management & Allocation Web Application built using **React.js (Vite)** and deployed on Vercel.
+A responsive and interactive Room Management & Allocation Web Application built using **React.js (Vite)** and deployed on Vercel.
 
-This project allows users to add rooms, search rooms, and intelligently allocate the smallest suitable room based on given requirements.
+This project allows users to add rooms, track room availability status, search rooms, and intelligently allocate the smallest suitable room based on given requirements with a real-time dashboard.
+
 
 ---
 
@@ -19,11 +21,15 @@ The Room Allocation System is designed to manage hostel rooms efficiently.
 It allows users to:
 
 - Add new rooms
-- View all rooms
+- View all rooms with allocation status
 - Search rooms
-- Allocate rooms based on requirements
+- Allocate rooms intelligently
+- Track Allocated / Available status
+- Dashboard statistics (Total / Allocated / Available)
+- Clear all rooms functionality
 - Delete rooms
 - Persist room data using localStorage
+
 
 The system ensures that the **smallest possible room** satisfying the requirements is allocated.
 
@@ -46,6 +52,7 @@ Displays:
 - Capacity
 - AC Status
 - Washroom Type
+- Allocation Status (Available / Allocated)
 - Delete Option
 
 ---
@@ -68,6 +75,26 @@ Users can filter rooms by:
 
 ---
 
+### 5️⃣ Room Status Tracking
+
+- Prevents re-allocation of already allocated rooms
+- Automatically updates room status after allocation
+- Displays real-time availability in Room List
+
+---
+
+### 6️⃣ Dashboard Analytics
+
+The application includes a real-time dashboard displaying:
+
+- Total Rooms
+- Allocated Rooms
+- Available Rooms
+
+The dashboard updates dynamically as rooms are added, allocated, or deleted.
+
+---
+
 ## 🎨 UI Features
 
 - Clean and centered layout
@@ -75,6 +102,8 @@ Users can filter rooms by:
 - Styled buttons and cards
 - Success & error message highlighting
 - Production CSS debugging handled
+- Interactive dashboard cards with hover animations
+- Smooth UI transitions
 
 ---
 
@@ -177,10 +206,8 @@ The application is fully responsive and works on:
 - Backend Integration (Node.js + Express)
 - Database (MongoDB)
 - Authentication (Admin Login)
-- Room Availability Status Tracking
 - Advanced Sorting & Filtering
 - Tailwind CSS Migration
-- UI Animation Enhancements
 
 ---
 
